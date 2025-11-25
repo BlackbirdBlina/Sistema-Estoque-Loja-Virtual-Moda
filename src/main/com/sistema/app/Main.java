@@ -1,6 +1,7 @@
 package main.com.sistema.app;
 
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import main.com.sistema.annotation.Etiqueta;
@@ -8,6 +9,7 @@ import main.com.sistema.arvore.ArvoreAVL;
 import main.com.sistema.dominio.Acessorio;
 import main.com.sistema.dominio.Produto;
 import main.com.sistema.dominio.Roupa;
+import main.com.sistema.excecao.NegocioException;
 import main.com.sistema.ordenacao.MergeSort;
 import main.com.sistema.repositorio.RepositorioAcessorio;
 import main.com.sistema.repositorio.RepositorioRoupa;
@@ -28,50 +30,74 @@ public class Main {
         System.out.println("Digite 0 para finalizar cadastros.");
     }
 
-    public static void cadastrarAcessorio(Scanner scanner, RepositorioAcessorio repositorioAcessorio, ArvoreAVL<Double, Produto> arvore) {
-        System.out.println("Digite o ID do Acessório:");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Digite o Nome do Acessório:");
-        String nome = scanner.nextLine();
-        System.out.println("Digite o Preço do Acessório.");
-        double preco = scanner.nextDouble();
-        scanner.nextLine();
-        System.out.println("Digite a Categoria do Acessório.");
-        String categoria = scanner.nextLine();
-        System.out.println("Digite o Material do Acessório.");
-        String material = scanner.nextLine();
-        System.out.println("Digite a Cor do Acessório.");
-        String cor = scanner.nextLine();
+    public static void cadastrarAcessorio(Scanner scanner, RepositorioAcessorio repositorioAcessorio, ArvoreAVL<Double, Produto> arvore) throws NegocioException {
+        try {
+            System.out.println("Digite o ID do Acessório:");
+            int id = scanner.nextInt();
+            if(id < 0) {
+                throw new NegocioException("O id não pode ser um valor negativo \n");
+            }
+            scanner.nextLine();
+            System.out.println("Digite o Nome do Acessório:");
+            String nome = scanner.nextLine();
+            System.out.println("Digite o Preço do Acessório.");
+            double preco = scanner.nextDouble();
+            if(preco < 0) {
+                throw new NegocioException("O preço não pode ser um valor negativo \n");
+            }
+            scanner.nextLine();
+            System.out.println("Digite a Categoria do Acessório.");
+            String categoria = scanner.nextLine();
+            System.out.println("Digite o Material do Acessório.");
+            String material = scanner.nextLine();
+            System.out.println("Digite a Cor do Acessório.");
+            String cor = scanner.nextLine();
 
-        Acessorio acessorio = new Acessorio(id, nome, preco, categoria, material, cor);
-        repositorioAcessorio.adicionar(acessorio);
-        arvore.inserir(acessorio.getPreco(), acessorio);
+            Acessorio acessorio = new Acessorio(id, nome, preco, categoria, material, cor);
+            repositorioAcessorio.adicionar(acessorio);
+            arvore.inserir(acessorio.getPreco(), acessorio);
 
-        System.out.println("Acessório" + acessorio.getNome() + ", adicionado com sucesso!");
+            System.out.println("Acessório" + acessorio.getNome() + ", adicionado com sucesso!");
+        } catch (InputMismatchException exception){
+            System.out.println("Ocorreu o seguinte problema enquanto se tentava ler o input: " + exception.getLocalizedMessage());
+        }
+
     }
 
-    public static void cadastrarRoupa(Scanner scanner, RepositorioRoupa repositorioRoupa, ArvoreAVL<Double, Produto> arvore) {
-        System.out.println("Digite o ID da Roupa:");
-        int id = scanner.nextInt();
-        System.out.println("Digite o Nome da Roupa:");
-        String nome = scanner.nextLine();
-        System.out.println("Digite o Preço da Roupa.");
-        double preco = scanner.nextDouble();
-        System.out.println("Digite a Categoria da Roupa.");
-        String categoria = scanner.nextLine();
-        System.out.println("Digite a Tamanho da Roupa.");
-        String tamanho = scanner.nextLine();
-        System.out.println("Digite o Material da Roupa.");
-        String material = scanner.nextLine();
-        System.out.println("Digite a Cor da Roupa.");
-        String cor = scanner.nextLine();
+    public static void cadastrarRoupa(Scanner scanner, RepositorioRoupa repositorioRoupa, ArvoreAVL<Double, Produto> arvore) throws NegocioException {
+        try {
+            System.out.println("Digite o ID da Roupa:");
+            int id = scanner.nextInt();
+            if(id < 0) {
+                throw new NegocioException("O id não pode ser um valor negativo \n");
+            }
+            scanner.nextLine();
+            System.out.println("Digite o Nome da Roupa:");
+            String nome = scanner.nextLine();
+            System.out.println("Digite o Preço da Roupa.");
+            double preco = scanner.nextDouble();
+            if(preco < 0) {
+                throw new NegocioException("O preço não pode ser um valor negativo \n");
+            }
+            scanner.nextLine();
+            System.out.println("Digite a Categoria da Roupa.");
+            String categoria = scanner.nextLine();
+            System.out.println("Digite a Tamanho da Roupa.");
+            String tamanho = scanner.nextLine();
+            System.out.println("Digite o Material da Roupa.");
+            String material = scanner.nextLine();
+            System.out.println("Digite a Cor da Roupa.");
+            String cor = scanner.nextLine();
 
-        Roupa roupa = new Roupa(id, nome, preco, categoria, tamanho, material, cor);
-        repositorioRoupa.adicionar(roupa);
-        arvore.inserir(roupa.getPreco(), roupa);
+            Roupa roupa = new Roupa(id, nome, preco, categoria, tamanho, material, cor);
+            repositorioRoupa.adicionar(roupa);
+            arvore.inserir(roupa.getPreco(), roupa);
 
-        System.out.println("Roupa" + roupa.getNome() + ", adicionada com sucesso!");
+            System.out.println("Roupa" + roupa.getNome() + ", adicionada com sucesso!");
+        } catch (InputMismatchException exception) {
+            System.out.println("Ocorreu o seguinte problema enquanto se tentava ler o input: " + exception.getLocalizedMessage());
+        }
+
 
     }
 
@@ -173,30 +199,27 @@ public class Main {
             imprimirOpcoes();
             int opcao = scanner.nextInt();
             scanner.nextLine();
-            if (opcao == 1) {
-                cadastrarAcessorio(scanner, repositorioAcessorio, arvore);
-            } else if (opcao == 2) {
-                cadastrarRoupa(scanner, repositorioRoupa, arvore);
-            } else if (opcao == 3) {
-                listarAcessorios(repositorioAcessorio);
-            } else if (opcao == 4) {
-                buscarAcessorio(scanner, repositorioAcessorio);
-            } else if (opcao == 5) {
-                removerAcessorio(scanner, repositorioAcessorio);
-            } else if (opcao == 6) {
-                listarRoupas(repositorioRoupa);
-            } else if (opcao == 7) {
-                buscarRoupa(scanner, repositorioRoupa);
-            } else if (opcao == 8) {
-                removerRoupa(scanner, repositorioRoupa);
-            } else if (opcao == 9) {
-                listarProdutos(arvore);
-            } else if (opcao == 0) {
-                controle = false;
-                System.out.println("Finalizando cadastros.");
-            } else {
-                System.out.println("Opção inválida, por favor digite 1 para acessório ou 2 para roupa");
+            try {
+                switch (opcao) {
+                    case 1 -> cadastrarAcessorio(scanner, repositorioAcessorio, arvore);
+                    case 2 -> cadastrarRoupa(scanner, repositorioRoupa, arvore);
+                    case 3 -> listarAcessorios(repositorioAcessorio);
+                    case 4 -> buscarAcessorio(scanner, repositorioAcessorio);
+                    case 5 -> removerAcessorio(scanner, repositorioAcessorio);
+                    case 6 -> listarRoupas(repositorioRoupa);
+                    case 7 -> buscarRoupa(scanner, repositorioRoupa);
+                    case 8 -> removerRoupa(scanner, repositorioRoupa);
+                    case 9 -> listarProdutos(arvore);
+                    case 0 -> {
+                        controle = false;
+                        System.out.println("Finalizando cadastros.");
+                    }
+                    default -> System.out.println("Opção inválida, por favor digite 1 para acessório ou 2 para roupa");
+                }
+            } catch (NegocioException exception) {
+                System.out.println(exception.getMessage());
             }
+
         }
     }
 
