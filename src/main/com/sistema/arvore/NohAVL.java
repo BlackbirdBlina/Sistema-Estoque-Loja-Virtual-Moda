@@ -1,7 +1,7 @@
 package main.com.sistema.arvore;
 
 public class NohAVL<K, V> {
-    private K chave;
+    private final K chave;
     private V valor;
     private NohAVL<K, V> esquerda;
     private NohAVL<K, V> direita;
