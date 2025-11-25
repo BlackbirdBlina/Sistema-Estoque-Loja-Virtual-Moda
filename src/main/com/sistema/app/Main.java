@@ -3,7 +3,7 @@ package main.com.sistema.app;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-
+import main.com.sistema.annotation.Etiqueta;
 import main.com.sistema.arvore.ArvoreAVL;
 import main.com.sistema.dominio.Acessorio;
 import main.com.sistema.dominio.Produto;
@@ -84,17 +84,21 @@ public class Main {
     }
 
     public static void buscarAcessorio(Scanner scanner, RepositorioAcessorio repositorioAcessorio) {
+        Class<?> classe = Acessorio.class;
+        Etiqueta etiqueta = classe.getAnnotation(Etiqueta.class);
         System.out.println("Digite o número do id:");
         int id = scanner.nextInt();
         Acessorio acessorio = repositorioAcessorio.buscar(id);
         if (acessorio != null) {
             System.out.println("Mostrando informações encontradas:");
+            System.out.println(etiqueta.marca());
+            System.out.println(etiqueta.paisOrigem() + "\n");
             System.out.println(acessorio.getId());
             System.out.println(acessorio.getNome());
             System.out.println(acessorio.getPreco());
             System.out.println(acessorio.getCategoria());
             System.out.println(acessorio.getMaterial());
-            System.out.println(acessorio.getCor());
+            System.out.println(acessorio.getCor() + "\n");
         } else {
             System.out.println("Acessório não encontrado.");
         }
@@ -120,18 +124,22 @@ public class Main {
     }
 
     public static void buscarRoupa(Scanner scanner, RepositorioRoupa repositorioRoupa) {
+        Class<?> classe = Roupa.class;
+        Etiqueta etiqueta = classe.getAnnotation(Etiqueta.class);
         System.out.println("Digite o número do id:");
         int id = scanner.nextInt();
         Roupa roupa = repositorioRoupa.buscar(id);
         if (roupa != null) {
             System.out.println("Mostrando informações encontradas:");
+            System.out.println(etiqueta.marca());
+            System.out.println(etiqueta.paisOrigem() + "\n");
             System.out.println(roupa.getId());
             System.out.println(roupa.getNome());
             System.out.println(roupa.getPreco());
             System.out.println(roupa.getCategoria());
             System.out.println(roupa.getTamanho());
             System.out.println(roupa.getMaterial());
-            System.out.println(roupa.getCor());
+            System.out.println(roupa.getCor() + "\n");
         } else {
             System.out.println("Roupa não encontrado.");
         }
