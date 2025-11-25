@@ -1,8 +1,5 @@
 package main.com.sistema.dominio;
 
-import main.com.sistema.annotation.InfoAutor;
-
-@InfoAutor(nome = "Sabrina Venceslau", data = "21/11/2025")
 public abstract class Produto {
     private final int id;
     private final String nome;

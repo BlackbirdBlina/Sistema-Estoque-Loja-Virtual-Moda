@@ -1,5 +1,8 @@
 package main.com.sistema.dominio;
 
+import main.com.sistema.annotation.Etiqueta;
+
+@Etiqueta(marca = "Pure Golden", paisOrigem = "EUA")
 public class Acessorio extends Produto {
     private final String material;
     private final String cor;

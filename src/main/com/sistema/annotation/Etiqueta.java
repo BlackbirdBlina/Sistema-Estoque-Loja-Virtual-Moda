@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InfoAutor {
-    String nome();
-    String data();
+public @interface Etiqueta {
+    String marca();
+    String paisOrigem();
 }
