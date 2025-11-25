@@ -3,10 +3,8 @@ package main.com.sistema.repositorio;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import main.com.sistema.annotation.InfoAutor;
 import main.com.sistema.dominio.Roupa;
 
-@InfoAutor(nome = "Sabrina Venceslau", data = "21/11/2025")
 public class RepositorioRoupa implements Repositorio<Roupa> {
     private final HashMap<Integer, Roupa> map = new HashMap<>();
 
