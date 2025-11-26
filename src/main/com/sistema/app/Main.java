@@ -57,7 +57,7 @@ public class Main {
             repositorioAcessorio.adicionar(acessorio);
             arvore.inserir(acessorio.getPreco(), acessorio);
 
-            System.out.println("Acessório" + acessorio.getNome() + ", adicionado com sucesso!");
+            System.out.println("Acessório " + acessorio.getNome() + ", adicionado com sucesso!");
         } catch (InputMismatchException exception){
             System.out.println("Ocorreu o seguinte problema enquanto se tentava ler o input: " + exception.getLocalizedMessage());
         }
@@ -93,7 +93,7 @@ public class Main {
             repositorioRoupa.adicionar(roupa);
             arvore.inserir(roupa.getPreco(), roupa);
 
-            System.out.println("Roupa" + roupa.getNome() + ", adicionada com sucesso!");
+            System.out.println("Roupa " + roupa.getNome() + ", adicionada com sucesso!");
         } catch (InputMismatchException exception) {
             System.out.println("Ocorreu o seguinte problema enquanto se tentava ler o input: " + exception.getLocalizedMessage());
         }
@@ -105,7 +105,7 @@ public class Main {
         Comparator<Acessorio> porPreco = Comparator.comparingDouble(p -> p.getPreco());
         List<Acessorio> acessoriosOrdenados = MergeSort.mergeSort(repositorioAcessorio.listar(), porPreco);
         for(Acessorio acessorio : acessoriosOrdenados){
-            System.out.println(acessorio.getNome() + " " + acessorio.getPreco());
+            System.out.println(acessorio.getNome() + " R$ " + acessorio.getPreco());
         }
     }
 
@@ -117,14 +117,14 @@ public class Main {
         Acessorio acessorio = repositorioAcessorio.buscar(id);
         if (acessorio != null) {
             System.out.println("Mostrando informações encontradas:");
-            System.out.println(etiqueta.marca());
-            System.out.println(etiqueta.paisOrigem() + "\n");
-            System.out.println(acessorio.getId());
-            System.out.println(acessorio.getNome());
-            System.out.println(acessorio.getPreco());
-            System.out.println(acessorio.getCategoria());
-            System.out.println(acessorio.getMaterial());
-            System.out.println(acessorio.getCor() + "\n");
+            System.out.println("Marca: " + etiqueta.marca());
+            System.out.println("País de origem: " + etiqueta.paisOrigem() + "\n");
+            System.out.println("ID: " + acessorio.getId());
+            System.out.println("Nome: " + acessorio.getNome());
+            System.out.println("Preço: R$ " + acessorio.getPreco());
+            System.out.println("Categoria: " + acessorio.getCategoria());
+            System.out.println("Material: " + acessorio.getMaterial());
+            System.out.println("Cor: " + acessorio.getCor() + "\n");
         } else {
             System.out.println("Acessório não encontrado.");
         }
@@ -145,7 +145,7 @@ public class Main {
         Comparator<Roupa> porPreco = Comparator.comparingDouble(p -> p.getPreco());
         List<Roupa> roupaOrdenadas = MergeSort.mergeSort(repositorioRoupa.listar(), porPreco);
         for(Roupa roupa : roupaOrdenadas){
-            System.out.println(roupa.getNome() + " " + roupa.getPreco());
+            System.out.println(roupa.getNome() + " R$ " + roupa.getPreco());
         }
     }
 
@@ -157,15 +157,15 @@ public class Main {
         Roupa roupa = repositorioRoupa.buscar(id);
         if (roupa != null) {
             System.out.println("Mostrando informações encontradas:");
-            System.out.println(etiqueta.marca());
-            System.out.println(etiqueta.paisOrigem() + "\n");
-            System.out.println(roupa.getId());
-            System.out.println(roupa.getNome());
-            System.out.println(roupa.getPreco());
-            System.out.println(roupa.getCategoria());
-            System.out.println(roupa.getTamanho());
-            System.out.println(roupa.getMaterial());
-            System.out.println(roupa.getCor() + "\n");
+            System.out.println("Marca: " + etiqueta.marca());
+            System.out.println("País de origem: " + etiqueta.paisOrigem() + "\n");
+            System.out.println("ID: " + roupa.getId());
+            System.out.println("Nome: " + roupa.getNome());
+            System.out.println("Preço: R$ " + roupa.getPreco());
+            System.out.println("Categoria: " + roupa.getCategoria());
+            System.out.println("Tamanho: " + roupa.getTamanho());
+            System.out.println("Material: " + roupa.getMaterial());
+            System.out.println("Cor: " + roupa.getCor() + "\n");
         } else {
             System.out.println("Roupa não encontrado.");
         }
@@ -185,7 +185,7 @@ public class Main {
     public static void listarProdutos(ArvoreAVL<Double, Produto> arvore) {
         List<Produto> produtos = arvore.emOrdem();
         for(Produto produto : produtos){
-            System.out.println(produto.getNome() + " " + produto.getPreco());
+            System.out.println(produto.getNome() + " R$ " + produto.getPreco());
         }
     }
 
